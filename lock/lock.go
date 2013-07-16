@@ -42,6 +42,7 @@ func LockOrExit(path string, unlockIfKilled bool) *LockFile {
         go func() {
             <-sig
             os.Remove(path)
+            os.Exit(1)
         }()
         signal.Notify(sig, syscall.SIGINT, syscall.SIGKILL)
     }
